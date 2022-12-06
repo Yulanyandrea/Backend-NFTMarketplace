@@ -8,7 +8,8 @@
 
 2. Configure the env
 ```shell
-$ cp .env.example .env
+see the  .env.example file to take the necessary info related with Mongo DB
+.env
 ```
 
 3. Update `.env` with the required info
