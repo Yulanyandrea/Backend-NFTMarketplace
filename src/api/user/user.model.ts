@@ -1,4 +1,4 @@
-import { Schema,model, Document } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import { userProfileData } from './user.types'
 
 export interface UserDocument extends Document{
