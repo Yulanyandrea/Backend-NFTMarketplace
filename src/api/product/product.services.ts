@@ -1,11 +1,11 @@
 import Product from './product.model';
 
 export function getAllProducts() {
-  return Product.find()
+  return Product.find({})
 }
 
 export function getProductById(id) {
-  return Product.findById(id)
+  return Product.findById(id).populate({path:'createdBy', select:'firstname lastname location'})
 }
 
 export function createProduct(product) {
