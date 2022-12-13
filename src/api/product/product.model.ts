@@ -30,10 +30,9 @@ const ProductSchema = new Schema({
     required: [true, 'Please provide a price'],
   },
   createdBy: {
-    // type: Schema.Types.ObjectId,
-    // ref: 'User',
-    // required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
   owner: {
     // type: Schema.Types.ObjectId,
@@ -59,7 +58,7 @@ const ProductSchema = new Schema({
     type: Array,
   },
   bids: {
-    type: Object,
+    type: Array,
   }
 }, {
   timestamps: true,
