@@ -1,6 +1,21 @@
 import { Schema, model, Document } from 'mongoose';
-import { userProfileData } from './user.types'
+import { userProfileData } from './user.types';
 
+
+const Payment = new Schema({
+  customerId: String,
+  cards: [
+    {
+      paymentMethodId: String,
+      brand: String,
+      country: String,
+      expMonth: Number,
+      expYear: Number,
+      funding: String,
+      last4: String,
+    },
+  ],
+});
 export interface UserDocument extends Document{
   firstName:string;
   lastName:string;
@@ -46,7 +61,6 @@ const UserSchema=new Schema({
   },
   phone:{
     type:String,
-    require:true,
     unique:true,
   },
   gendre:{
