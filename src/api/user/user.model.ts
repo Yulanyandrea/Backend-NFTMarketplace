@@ -2,7 +2,6 @@ import { Schema, model, Document } from 'mongoose';
 import { userProfileData } from './user.types';
 import bcrypt from 'bcrypt';
 
-
 const Payment = new Schema({
   customerId: String,
   cards: [
@@ -167,20 +166,16 @@ const UserSchema=new Schema({
     }
   })
 
-
-
   //method
   UserSchema.methods.comparePassword = async function comparePassword(this: UserDocument,candidatePassword:string, next:Function) {
     const user = this ;
-   try {
-    const isMatch = await bcrypt.compare(candidatePassword,user.password);
-    return isMatch;
-   } catch (error:any) {
-    next(error)
-    return false;
-
-   }
-
+    try {
+      const isMatch = await bcrypt.compare(candidatePassword,user.password);
+      return isMatch;
+    } catch (error:any) {
+      next(error)
+      return false;
+    }
   }
 
   const User=model<UserDocument>('User',UserSchema);
