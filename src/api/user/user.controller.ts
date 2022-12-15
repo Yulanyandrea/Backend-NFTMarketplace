@@ -2,7 +2,8 @@ import {getAllUsers,
   createUser,
   getUserById,
   updateUser,
-  deleteUser} from './user.services';
+  deleteUser,
+  getUser } from './user.services';
 import {Request, Response, NextFunction} from 'express';
 
 export async function handleAllGetUsers(req:Request,res:Response,next:NextFunction){
@@ -70,6 +71,22 @@ export async function handleDeleteUser(req:Request,res:Response,next:NextFunctio
 
   }
 
+}
+
+export async function handleLoginUser(req:Request,res:Response,next:NextFunction) {
+  const { email, password }=req.body;
+  try {
+    const userLogin=await getUser({email})
+    if(!userLogin){
+      return res.status(404).json({message:"user not found"})
+    }
+    const validatePassword= await userLogin.comparePassword(password)
+    return res.status(200).json({message:"User logged in"})
+
+  } catch (error:any) {
+    return res.status(500).json(error.message)
+
+  }
 }
 
 

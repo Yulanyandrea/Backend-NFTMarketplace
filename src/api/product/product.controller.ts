@@ -5,8 +5,9 @@ import {
   updateProduct,
   deleteProduct,
 } from './product.services'
+import { Request, Response, NextFunction } from 'express';
 
-export async function handleGetAllProducts(req, res) {
+export async function handleGetAllProducts(req:Request,res:Response,next:NextFunction) {
   try {
     const products = await getAllProducts();
     return res.status(200).json(products);
@@ -17,7 +18,7 @@ export async function handleGetAllProducts(req, res) {
   }
 }
 
-export async function handleGetProductById(req, res) {
+export async function handleGetProductById(req:Request,res:Response,next:NextFunction) {
   const { id } = req.params;
   try {
     const getProduct = await getProductById(id);
@@ -32,18 +33,18 @@ export async function handleGetProductById(req, res) {
   }
 }
 
-export async function handleCreateProduct(req, res){
+export async function handleCreateProduct(req:Request,res:Response,next:NextFunction){
   const data = req.body;
   try {
     const product = await createProduct(data);
     return res.status(201).json(product);
 
-  } catch (error) {
+  } catch (error:any) {
     return res.status(500).json(error.message)
   }
 }
 
-export async function handleUpdateProduct(req, res) {
+export async function handleUpdateProduct(req:Request,res:Response,next:NextFunction) {
   const data =req.body;
   const { id }=req.params;
   try {
@@ -55,7 +56,7 @@ export async function handleUpdateProduct(req, res) {
   }
 }
 
-export async function handleDeleteProduct(req, res) {
+export async function handleDeleteProduct(req:Request,res:Response,next:NextFunction) {
   const { id }=req.params;
   try {
     const product=await getProductById(id);
