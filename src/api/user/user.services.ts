@@ -1,5 +1,5 @@
-import User,{UserDocument} from './user.model';
-import { DocumentDefinition,FilterQuery } from "mongoose";
+import User, {UserDocument}  from './user.model';
+import { DocumentDefinition, FilterQuery } from "mongoose";
 
 export function getAllUsers(){
   return User.find();
@@ -10,8 +10,8 @@ export function getUserById(id:string){
   return user;
 }
 
-export function getUser(filter:FilterQuery<UserDocument>){
-  const user = User.findOne(filter)
+export function getUser(filter: FilterQuery<UserDocument>) {
+  const user = User.findOne(filter);
   return user;
 }
 
