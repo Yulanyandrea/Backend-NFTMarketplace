@@ -1,6 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
-import { userProfileData } from './user.types';
 import bcrypt from 'bcrypt';
+import { userProfileData } from './user.types';
+
 
 const Payment = new Schema({
   customerId: String,
@@ -25,7 +26,7 @@ export interface UserDocument extends Document{
   location:string;
   address:string;
   currency:string;
-  role:string;
+  role: 'USER' | 'ADMIN';
   email:string;
   socialmedia:string;
   followers:number;
@@ -46,11 +47,11 @@ export interface UserDocument extends Document{
 }
 
 const UserSchema=new Schema({
-  firstname:{
+  firstName:{
     type:String,
     require:[true, 'Please provide a name'],
   },
-  lastname:{
+  lastName:{
     type:String,
     require:true
   },
@@ -123,9 +124,9 @@ const UserSchema=new Schema({
   })
 
   UserSchema.virtual('userProfile').get(function fulldataUser(){
-    const {firstname,lastname, location, email, role, profilepicture, coverpicture}=this
-    return { firstname,
-      lastname,
+    const { firstName, lastName, location, email, role, profilepicture, coverpicture }=this
+    return { firstName,
+      lastName,
       location,
       email,
       role,
@@ -150,27 +151,11 @@ const UserSchema=new Schema({
     }
   })
 
-  UserSchema.pre('save',async function save(next: Function){
-    const user = this as UserDocument;
-    try {
-      if(!user.isModified('password')){
-        return next()
-      }
-      const salt = await bcrypt.genSalt(10);
-      const hash = await bcrypt.hash(user.password, salt);
-
-      user.password = hash;
-
-    } catch (error:any) {
-      next(error);
-    }
-  })
-
-  //method
-  UserSchema.methods.comparePassword = async function comparePassword(this: UserDocument,candidatePassword:string, next:Function) {
+  async function comparePassword(this: UserDocument,candidatePassword:string, next:Function) {
     const user = this ;
     try {
       const isMatch = await bcrypt.compare(candidatePassword,user.password);
+      console.log(isMatch);
       return isMatch;
     } catch (error:any) {
       next(error)
@@ -178,6 +163,7 @@ const UserSchema=new Schema({
     }
   }
 
+  UserSchema.methods.comparePassword = comparePassword;
+
   const User=model<UserDocument>('User',UserSchema);
   export default User;
-

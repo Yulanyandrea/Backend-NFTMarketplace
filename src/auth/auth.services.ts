@@ -7,11 +7,6 @@ import { AuthRequest, Roles } from './auth.types';
 
 const SECRET = process.env.SECRET_TOKEN_APP as string;
 
-/**
- * Returns a JWT token signed by the app secret
- * @param payload Object | String Data to be signed
- * @returns token String
- */
 export function signToken(payload: any) {
   const token = jwt.sign(
     payload,
@@ -22,11 +17,6 @@ export function signToken(payload: any) {
   return token;
 }
 
-/**
- * Validates a JWT
- * @param token String JWT token
- * @returns Object | Boolean
- */
 export function verifyToken(token: string) {
   try {
     const decoded = jwt.verify(token, SECRET) as UserDocument;
@@ -37,14 +27,6 @@ export function verifyToken(token: string) {
   }
 }
 
-
-/**
- * Verifies if the user is authenticated
- * @param req
- * @param res
- * @param next
- * @returns
- */
 export async function isAuthenticated(req: AuthRequest, res: Response, next: NextFunction) {
   const token = req.headers?.authorization?.split(' ')[1];
 

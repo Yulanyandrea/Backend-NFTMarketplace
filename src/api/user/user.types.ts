@@ -6,5 +6,5 @@ export type userProfileData={
   role:string;
   profilepicture:string;
   coverpicture:string;
-
 }
+

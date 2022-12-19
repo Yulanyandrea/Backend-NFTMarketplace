@@ -15,11 +15,6 @@ export function getUser(filter: FilterQuery<UserDocument>) {
   return user;
 }
 
-export function getUser(filter:FilterQuery<UserDocument>){
-  const user = User.findOne(filter)
-  return user;
-}
-
 export function createUser(user:DocumentDefinition<Omit<UserDocument,'createdAt'| 'updateAt'>>){
   return User.create(user);
 }
