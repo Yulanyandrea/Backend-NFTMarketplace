@@ -65,7 +65,7 @@ export async function handleDeleteProduct(req:Request,res:Response,next:NextFunc
       return res.status(404).json({message:"Product not found"});
     }
 
-    //await product.remove();
+    await product.remove();
     return res.status(200).json({message: "Product deleted"});
 
   } catch (error) {

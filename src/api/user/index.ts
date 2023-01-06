@@ -3,8 +3,8 @@ import { handleAllGetUsers,
   handleGetUser,
   handleCreateUser ,
   handleUpdateUser,
-  handleDeleteUser,
- handleLoginUser} from './user.controller';
+  handleDeleteUser
+} from './user.controller';
 
 const router=Router()
 
@@ -19,13 +19,11 @@ router.get('/:id', handleGetUser);
 //post
 router.post('/',handleCreateUser);
 
-
 //patch
 router.patch('/:id',handleUpdateUser);
 
 //delete
 router.delete('/:id',handleDeleteUser);
 
-router.post('/login', handleLoginUser)
 
 export default router;
