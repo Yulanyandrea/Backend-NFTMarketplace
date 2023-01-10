@@ -18,8 +18,8 @@ const Payment = new Schema({
   ],
 });
 export interface UserDocument extends Document{
-  firstName:string;
-  lastName:string;
+  firstname:string;
+  lastname:string;
   password:string;
   phone:string;
   gendre:string;
@@ -47,11 +47,11 @@ export interface UserDocument extends Document{
 }
 
 const UserSchema=new Schema({
-  firstName:{
+  firstname:{
     type:String,
     required:[true, 'Please provide a name'],
   },
-  lastName:{
+  lastname:{
     type:String,
     required:true
   },
@@ -124,9 +124,9 @@ const UserSchema=new Schema({
   })
 
   UserSchema.virtual('userProfile').get(function fulldataUser(){
-    const { firstName, lastName, location, email, role, profilepicture, coverpicture }=this
-    return { firstName,
-      lastName,
+    const { firstname, lastname, location, email, role, profilepicture, coverpicture }=this
+    return { firstname,
+      lastname,
       location,
       email,
       role,

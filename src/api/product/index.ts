@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { isAuthenticated, hasRole } from '../../auth/auth.services';
 
 import {
   handleGetAllProducts,
@@ -12,8 +13,8 @@ const router = Router();
 
 router.get('/', handleGetAllProducts);
 router.get('/:id', handleGetProductById);
-router.post('/', handleCreateProduct);
-router.patch('/:id', handleUpdateProduct);
-router.delete('/:id', handleDeleteProduct);
+router.post('/', isAuthenticated, hasRole(['ADMIN', 'USER']), handleCreateProduct);
+router.patch('/:id', isAuthenticated, hasRole(['ADMIN', 'USER']), handleUpdateProduct);
+router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteProduct);
 
 export default router;
