@@ -27,4 +27,5 @@ router.patch('/:id', isAuthenticated, hasRole(['ADMIN', 'USER']), handleUpdateUs
 //delete
 router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteUser);
 
+
 export default router;

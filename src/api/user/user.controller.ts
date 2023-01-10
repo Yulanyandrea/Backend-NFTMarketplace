@@ -1,4 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
+import { sendNodeMailer } from "../../utils/emails";
 import {getAllUsers,
   createUser,
   getUserById,
@@ -20,15 +21,47 @@ export async function handleAllGetUsers(req:Request,res:Response,next:NextFuncti
 
 export async function handleCreateUser(req:Request,res:Response,next:NextFunction){
   const data=req.body;
-  console.log(data);
-  try {
+   try {
     const user= await createUser(data);
+    const emailData={
+      from:process.env.SMTP_USER,
+      to:data.email,
+      subject:'Your account has been activated',
+      text:'Welcome to NFT market place',
+      html:'<b>Welcome to NFT market place</b>'
+    }
+    await sendNodeMailer(emailData)
     return res.status(201).json(user);
 
-  } catch (error:any) {
+   } catch (error:any) {
+    console.error(error)
     return res.status(500).json(error.message)
+
+   }
   }
-}
+
+//SENDGRID
+
+//   try {
+//     const user= await createUser(data);
+
+//     const message={
+//       to:user.email,
+//       from:`'no reply'<yulany.munevar.sanbuenaventura@gmail.com>`,
+//       subject:'Your account has been activated',
+//       text:'Welcome to NFT market place',
+//       html:`<b>Welcome to NFT market place</b>`,
+//     }
+//     const mensaje= await sendMailSendGrid(message)
+//     console.log(mensaje)
+//     return res.status(201).json(user);
+
+
+//   } catch (error:any) {
+//     return res.status(500).json(error.message)
+//   }
+
+// }
 
 export async function handleGetUser(req:Request,res:Response,next:NextFunction){
   const {id}=req.params;
@@ -73,8 +106,3 @@ export async function handleDeleteUser(req:Request,res:Response,next:NextFunctio
   }
 
 }
-
-
-
-
-
