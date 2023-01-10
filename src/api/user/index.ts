@@ -25,4 +25,5 @@ router.patch('/:id',handleUpdateUser);
 //delete
 router.delete('/:id',handleDeleteUser);
 
+
 export default router;

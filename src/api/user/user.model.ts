@@ -49,15 +49,15 @@ export interface UserDocument extends Document{
 const UserSchema=new Schema({
   firstName:{
     type:String,
-    require:[true, 'Please provide a name'],
+    required:[true, 'Please provide a name'],
   },
   lastName:{
     type:String,
-    require:true
+    required:true
   },
   password:{
     type:String,
-    require:true,
+    required:true,
     min:6,
     max:8
   },
@@ -67,11 +67,11 @@ const UserSchema=new Schema({
   },
   gendre:{
     type:String,
-    require:true
+    required:true
   },
   location:{
     type:String,
-    require:true,
+    required:true,
     uppercase: true,
   },
   address:{
