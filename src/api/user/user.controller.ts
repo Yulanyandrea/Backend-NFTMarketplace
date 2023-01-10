@@ -20,6 +20,7 @@ export async function handleAllGetUsers(req:Request,res:Response,next:NextFuncti
 
 export async function handleCreateUser(req:Request,res:Response,next:NextFunction){
   const data=req.body;
+  console.log(data);
   try {
     const user= await createUser(data);
     return res.status(201).json(user);
@@ -64,7 +65,7 @@ export async function handleDeleteUser(req:Request,res:Response,next:NextFunctio
     if(!user){
       return res.status(404).json({message:"user not found"});
     }
-    await user.remove();
+    //await user.remove();
     return res.status(200).json({message: "user deleted"});
   } catch (error) {
     return res.status(500).json(error)

@@ -31,19 +31,19 @@ export async function isAuthenticated(req: AuthRequest, res: Response, next: Nex
   const token = req.headers?.authorization?.split(' ')[1];
 
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'No token' });
   }
 
   const decoded = verifyToken(token) as UserDocument;
 
   if (!decoded) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Invalid token' });
   }
 
   const user = await getUser({ email: decoded.email });
 
   if (!user) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'User not found' });
   }
 
   req.user = user;
@@ -52,12 +52,6 @@ export async function isAuthenticated(req: AuthRequest, res: Response, next: Nex
   return true;
 }
 
-
-/**
- * Verifies if the user has the required role
- * @param allowRoles Roles
- * @returns
- */
 export function hasRole(allowRoles: Roles) {
   return (req: AuthRequest, res: Response, next: NextFunction) => {
     const { role } = req.user as UserDocument;

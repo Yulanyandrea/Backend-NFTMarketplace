@@ -1,4 +1,6 @@
 import {Router} from 'express';
+import { isAuthenticated, hasRole } from '../../auth/auth.services';
+
 import { handleAllGetUsers,
   handleGetUser,
   handleCreateUser ,
@@ -17,12 +19,12 @@ router.get('/', handleAllGetUsers);
 router.get('/:id', handleGetUser);
 
 //post
-router.post('/',handleCreateUser);
+router.post('/', handleCreateUser);
 
 //patch
-router.patch('/:id',handleUpdateUser);
+router.patch('/:id', isAuthenticated, hasRole(['ADMIN', 'USER']), handleUpdateUser);
 
 //delete
-router.delete('/:id',handleDeleteUser);
+router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteUser);
 
 export default router;
