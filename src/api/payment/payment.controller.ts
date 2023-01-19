@@ -1,7 +1,6 @@
 import Stripe from 'stripe';
 import {Request, Response} from 'express';
 
-
 const secret=process.env.STRIPE_SECRET_KEY as string;
 const stripe=new Stripe(secret, {apiVersion:'2022-11-15'} )
 
@@ -18,10 +17,8 @@ const stripe=new Stripe(secret, {apiVersion:'2022-11-15'} )
       description:'NFT payment',
     })
     return res.json({message:'sucessfull', payment})
-
   } catch (error:any) {
     return res.status(500).json({message:error.message})
-
   }
 }
 
