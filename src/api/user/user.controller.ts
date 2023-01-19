@@ -98,7 +98,7 @@ export async function handleDeleteUser(req:Request,res:Response,next:NextFunctio
     if(!user){
       return res.status(404).json({message:"user not found"});
     }
-    //await user.remove();
+    await user.remove();
     return res.status(200).json({message: "user deleted"});
   } catch (error) {
     return res.status(500).json(error)

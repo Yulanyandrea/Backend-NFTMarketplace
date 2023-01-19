@@ -67,11 +67,10 @@ const UserSchema=new Schema({
   },
   gendre:{
     type:String,
-    required:true
+
   },
   location:{
     type:String,
-    required:true,
     uppercase: true,
   },
   address:{
