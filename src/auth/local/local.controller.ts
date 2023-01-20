@@ -25,7 +25,7 @@ export async function handleLoginUser(req: Request, res: Response, next: NextFun
     //Generate JWT
     const token = signToken(payload);
 
-    return res.status(200).json({ profile: user.userProfile, token });
+    return res.status(200).json({ profile: user, token });
   } catch (error: any) {
     return res.status(500).json(error.message);
   }

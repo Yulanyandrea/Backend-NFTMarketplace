@@ -25,6 +25,6 @@ router.post('/', handleCreateUser);
 router.patch('/:id', isAuthenticated, hasRole(['ADMIN', 'USER']), handleUpdateUser);
 
 //delete
-router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteUser);
+router.delete('/:id',isAuthenticated, handleDeleteUser);
 
 export default router;

@@ -67,11 +67,10 @@ const UserSchema=new Schema({
   },
   gendre:{
     type:String,
-    required:true
+
   },
   location:{
     type:String,
-    required:true,
     uppercase: true,
   },
   address:{
@@ -165,5 +164,5 @@ const UserSchema=new Schema({
 
   UserSchema.methods.comparePassword = comparePassword;
 
-  const User=model<UserDocument>('User',UserSchema);
+  const User = model<UserDocument>('User',UserSchema);
   export default User;
