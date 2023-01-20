@@ -10,7 +10,7 @@ export function getUserById(id:string){
   return user;
 }
 
-export function getUser(filter: FilterQuery<UserDocument>) {
+export function getUser(filter: FilterQuery<Omit<UserDocument, 'password'>>) {
   const user = User.findOne(filter);
   return user;
 }

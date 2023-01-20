@@ -164,5 +164,5 @@ const UserSchema=new Schema({
 
   UserSchema.methods.comparePassword = comparePassword;
 
-  const User=model<UserDocument>('User',UserSchema);
+  const User = model<UserDocument>('User',UserSchema);
   export default User;
